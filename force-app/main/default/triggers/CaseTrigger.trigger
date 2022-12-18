@@ -1,4 +1,7 @@
 trigger CaseTrigger on Case (before insert, after insert, before update, after update) {
+  if(Trigger.isAfter && Trigger.isInsert){
+    CaseTriggerHandler.checkCaseDescription(trigger.new);
+  }
   /*system.debug('We are in the triggers');
   if(trigger.isAfter){
      system.debug('We are in the after triggers');
@@ -37,7 +40,7 @@ if(trigger.isAfter && trigger.isInsert){
     }*/
     //PART2-1
 
-    if(trigger.isBefore&& trigger.isInsert){
+    /*if(trigger.isBefore&& trigger.isInsert){
       
       CaseTriggerHandler.setStatusAndPriority(trigger.new);/*for(case eachCase: trigger.new){
         if(eachCase.Origin == 'Email'){
@@ -45,8 +48,9 @@ if(trigger.isAfter && trigger.isInsert){
            eachCase.Priority='Medium';
     }
   }*/
+
   }
-}
+
 
 
 
