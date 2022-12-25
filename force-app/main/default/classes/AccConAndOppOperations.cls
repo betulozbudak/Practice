@@ -1,5 +1,5 @@
 public class AccConAndOppOperations {
-    public static list<account> takeInfo() {
+    /*public static list<account> takeInfo() {
          List<account> listAcc = new List<Account>();
          listAcc = [select id, name, AnnualRevenue, Type, AccountSource FROM Account];
          return listAcc;
@@ -53,7 +53,38 @@ public class AccConAndOppOperations {
         insert con1;
         system.debug(con1);
     }
-}    
+    public static void updateTenOpp(){
+        list<opportunity> oppList = [select id, name, amount from Opportunity where amount > 0 order by amount desc limit 10];
+        for(opportunity eachOpp: oppList){
+            eachOpp.Description = 'This one of the top 10 opp';
+        }
+        update oppList;
+    }
+    */
+    public static List<Opportunity>  oppCheck(integer n, id accId){
+        account accLimit1=[select id,name, Annaualrevenue from account where id =: accId];
+        List<Opportunity> oppList = new List<Opportunity>();
+            if(n>0){
+                for(Integer i=0; i<n; i++){
+                    Opportunity opp1 = new <opportunity>();
+                    opp1.StageName ='Prospecting';
+                    opp1.CloseDate = Date.today().addYears(3);
+                    opp1.AccountId=accId;
+                    opp1.Name = accLimit1.Name;
+                    if(accLimit1.AnnualRevenue != null){
+                        opp1.Amount = accLimit1.AnnualRevenue / n;
+                    }
+                    oppList.add(opp1);
+                }
+                insert oppList; 
+            }else{
+                system.debug('Please tell us how mny opportunities needs to be created');
+            }
+            
+            return oppList;
+        }
+    }    
+
 
 
 

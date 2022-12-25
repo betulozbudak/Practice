@@ -28,6 +28,10 @@ for(account eachAcc : var3){
 }
 
 AccConAndOppOperations.createcont('0016S00003GWPbgQAH');
+AccConAndOppOperations.updateTenOpp();
+
+list<opportunity> opp = AccConAndOppOperations.oppCheck(2,'0016S00003GWPbcQAH');
+
 
 
 
