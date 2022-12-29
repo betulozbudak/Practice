@@ -40,17 +40,19 @@ if(trigger.isAfter && trigger.isInsert){
     }*/
     //PART2-1
 
-    /*if(trigger.isBefore&& trigger.isInsert){
+/*   if(trigger.isBefore&& trigger.isInsert){
       
-      CaseTriggerHandler.setStatusAndPriority(trigger.new);/*for(case eachCase: trigger.new){
+      CaseTriggerHandler.setStatusAndPriority(trigger.new);
+      for(case eachCase: trigger.new){
         if(eachCase.Origin == 'Email'){
            eachCase.Status ='New';
            eachCase.Priority='Medium';
     }
-  }*/
-
   }
 
+  }
+  */
+}
 
 
 

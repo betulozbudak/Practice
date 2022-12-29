@@ -1,5 +1,5 @@
 trigger AccountTrigger on Account (before insert,after insert,before update, after update) {
-    if(Trigger.isAfter && Trigger.isInsert){
+    /*if(Trigger.isAfter && Trigger.isInsert){
       AccountTriggerHandler.accountCreateContact(trigger.new);
     }
     if(Trigger.isAfter && Trigger.isUpdate){
@@ -8,7 +8,7 @@ trigger AccountTrigger on Account (before insert,after insert,before update, aft
     }
     if(Trigger.isBefore && Trigger.isUpdate){
        AccountTriggerHandler.accAnnualRevenue(trigger.New, Trigger.OldMap);
-    }
+    }*/
 }
 
 

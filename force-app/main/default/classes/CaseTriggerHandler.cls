@@ -17,7 +17,8 @@ field contains the word ‘password’, then create a child case with the follow
       public static void checkCaseDescription(list<case> triggerNew){
           set<id> caseIds = new set<id>();
           for(case eachCase : triggerNew){
-            if(eachCase.Description.containsIgnoreCase('password')){
+            
+            if(eachCase.Description!= null && eachCase.Description.containsIgnoreCase('password')){
                caseIds.add(eachCase.id);
             }
           }
@@ -33,7 +34,8 @@ field contains the word ‘password’, then create a child case with the follow
                 listCase.add(c1);
              }
              insert listCase;
-          }
+         }
+         
       }
 }
 
