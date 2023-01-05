@@ -12,22 +12,42 @@ follows:
 
 public class AccountTriggerHandler {
     public static void accountCreateContact(list<account> triggerNew) {
+        try{
         list<contact> listCon= new list<contact>();
         for(account acc : triggerNew){
+            
             contact c = new contact();
             c.AccountId = acc.id;
             c.LastName = acc.Name;
             c.Phone =acc.Phone;
+            //c.Status__c='New';
             listCon.add(c);
         }
-        insert listCon;
+       
+        if(!listCon.isEmpty()){
+            //insert listCon;
+            
+            list<database.saveresult> results = Database.insert(listCon,false);
+            for(database.SaveResult eachresult: results){
+                if(eachresult.success){
+                    system.debug('inserted record Id is ' + eachresult.getId());
+                }else{
+                    system.debug('ERROR' + eachresult.getErrors());
+                }
+            }
+        }
+    }catch (Exception ex){
+        for(account ac: triggerNew){
+           ac.addError('Cannot create a contact.');
+        }
+    }
     }
 
-    public static void accountUpdatedOpp(list<account> triggerNew ){
+   /*public static void accountUpdatedOpp(list<account> triggerNew ){
         /*set<id> accId = new set<id>();
         for(account eachacc: triggerNew){
             accId.add(eachacc.id);
-        }*/
+        }
         //set<id> accId2 = triggerNewMap.keyset();
         list<Opportunity> listOpp = [select id, StageName from Opportunity where AccountId in: triggerNew AND StageName!='Closed Won'];
         if(!listOpp.isEmpty()){
@@ -63,7 +83,7 @@ public class AccountTriggerHandler {
     /*When the Annual revenue value of an Account is reduced from the previous value then show the
     following message:
     ‘Annual Revenue for an account cannot be reduced’. And do not allow the user to save the record.*/
-    public static void accAnnualRevenue(list<account> triggerNew, map<id,account> TriggerOldMap){
+    /*public static void accAnnualRevenue(list<account> triggerNew, map<id,account> TriggerOldMap){
         for(Account eachAcc : triggerNew){
             if(eachAcc.AnnualRevenue < TriggerOldMap.get(eachAcc.id).AnnualRevenue || eachAcc.AnnualRevenue == null){
                 //eachAcc.AnnualRevenue.addError('Annual Revenue for an account cannot be reduced.');
@@ -72,7 +92,7 @@ public class AccountTriggerHandler {
         }
     }
 
-    
+    */
 }
 
 

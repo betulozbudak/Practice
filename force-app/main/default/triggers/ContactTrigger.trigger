@@ -1,5 +1,10 @@
 trigger ContactTrigger on Contact (before insert, after insert, before update, after update) {
-    if(trigger.isAfter && trigger.isUpdate){
+    
+    
+    
+    
+    
+    /*if(trigger.isAfter && trigger.isUpdate){
         
         //27 Aralik Assignment
         ContactTriggerHandler.updateNoOfContacts(trigger.new, trigger.newMap);
