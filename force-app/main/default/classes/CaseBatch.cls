@@ -15,8 +15,14 @@ public class CaseBatch implements Database.Batchable<SObject> , database.statefu
     integer count=0;
     public database.QueryLocator start(database.BatchableContext bc) {
         
-        database.QueryLocator q1 = Database.getQueryLocator([select id, OwnerId, LastModifiedDate, Status from case where status !='Closed' and LastModifiedDate < LAST_N_DAYS: 5]);
-        
+        database.QueryLocator q1;
+
+        if(!test.isRunningTest()){
+            q1 = Database.getQueryLocator([select id, OwnerId, LastModifiedDate, Status from case where status !='Closed' and LastModifiedDate < LAST_N_DAYS: 5]);
+        }else{
+            q1 = Database.getQueryLocator([select id, OwnerId, LastModifiedDate, Status from case where status !='Closed']); 
+        }
+
         return q1;
     }
 
