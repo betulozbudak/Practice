@@ -1,4 +1,4 @@
-public class OpportunityBatch2 implements Database.Batchable <SObject>, Database.stateful{
+    public class OpportunityBatch2 implements Database.Batchable <SObject>, Database.stateful{
     /*Write a logic to delete all the opportunities which were updated as closed Lost using BATCH
     apex, also print total number of opportunities DELETED.*/
     public integer count = 0;
